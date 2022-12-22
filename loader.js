@@ -3,34 +3,55 @@
     const script = document.currentScript;
     // cors({origin: "*"})
     const loadWidget = () => {
-        
-        const widget= document.createElement("div");
 
-        const widgetStyle = widget.style;
-        widgetStyle.display = "none";
-        widgetStyle.boxSizing = "border-box";
-        widgetStyle.width = "500px";    
-        widgetStyle.height = "600px";
-        widgetStyle.position = "absolute";
-        widgetStyle.top = "40px";
-        widgetStyle.right = "500px";
+        const chatIcon = document.createElement("div")
+        const chatIconStyle = chatIcon.style;
+        chatIconStyle.width = "60px";    
+        chatIconStyle.height = "60px";
+        chatIconStyle.borderRadius = "30px"
+        chatIconStyle.backgroundColor = "blue"
+        chatIconStyle.position = "fixed";
+        chatIconStyle.bottom = "40px";
+        chatIconStyle.right = "50px";
+
+        const imageTag = document.createElement("img")
+        const imageTagStyle = imageTag.style
+        imageTag.src = "https://cdn.pixabay.com/photo/2016/06/13/17/30/mail-1454731__340.png"
+        imageTagStyle.width = "60px"
+        imageTagStyle.height = "60px"
+
+        chatIcon.appendChild(imageTag)
+
+        const chatBox = document.createElement("div")
+        const chatBoxStyle = chatBox.style;
+        chatBoxStyle.display = "none"
+        chatBoxStyle.width = "500px";    
+        chatBoxStyle.height = "600px";
+        chatBoxStyle.padding = "8px"
+        // chatBoxStyle.backgroundColor = "blue"
+        chatBoxStyle.position = "fixed";
+        chatBoxStyle.top = "85px";
+        chatBoxStyle.right = "100px";
+        chatBoxStyle.overflow = "hidden"
+
+        chatIcon.appendChild(chatBox)
 
         const iframe = document.createElement("iframe");
 
         const iframeStyle = iframe.style;
-        iframeStyle.boxSizing = "borderBox";
-        // iframeStyle.position = "absolute";
-        iframeStyle.right = 0;
-        iframeStyle.top = 0;
+        iframeStyle.border = "none"
         iframeStyle.width = "100%";
         iframeStyle.height = "100%";
-        iframeStyle.border = 0;
-        iframeStyle.margin = 0;
-        iframeStyle.padding = 0;
+        iframeStyle.borderRadius="20px"
+        chatBox.appendChild(iframe);
 
-        widget.appendChild(iframe);
-        
-        iframe.addEventListener("load", () => widgetStyle.display = "block" );
+        chatIcon.addEventListener("click" , ()=> {
+            if(chatBoxStyle.display == "none"){
+                chatBoxStyle.display = "block"
+            }else{
+                chatBoxStyle.display = "none"
+            }
+        })
         
         const license = script.getAttribute("data-license");
         const widgetUrl = `https://chat-widget-five.vercel.app/?license=${license}`;
@@ -38,12 +59,10 @@
         
         iframe.addEventListener("load", () => {
             iframe.contentWindow.postMessage({greeting}, "https://chat-widget-five.vercel.app/");
-            widgetStyle.display = "block";
          });
         
         iframe.src = widgetUrl;
-
-        document.body.appendChild(widget);
+        document.body.appendChild(chatIcon);
         
     }
     
