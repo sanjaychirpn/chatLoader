@@ -53,8 +53,8 @@
             }
         })
         
-        const license = script.getAttribute("data-license");
-        const widgetUrl = `https://chat-widget-five.vercel.app/?license=${license}`;
+        const license = script.getAttribute("data-visitor-id");
+        const widgetUrl = `https://chat-widget-five.vercel.app/?visitorId=r213d-rt5hhe-52ebxg`;
         const greeting = script.getAttribute("data-greeting");
         
         iframe.addEventListener("load", () => {
